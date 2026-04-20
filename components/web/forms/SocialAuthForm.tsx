@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
+import ROUTES from "@/constants/routes";
 
 const SocialAuthForm = () => {
   const buttonClass =
@@ -11,7 +13,10 @@ const SocialAuthForm = () => {
 
   const handleSignIn = async (provider: "github" | "google") => {
     try {
-      throw new Error("Not implemented");
+      await authClient.signIn.social({
+        provider,
+        callbackURL: ROUTES.HOME,
+      });
     } catch (error) {
       toast.error("Sign-in Failed", {
         description:
