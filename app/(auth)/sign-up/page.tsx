@@ -1,7 +1,117 @@
-import React from "react";
+"use client";
 
-const SignUp = () => {
-  return <div>sign-up</div>;
+import React from "react";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Controller, useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import ROUTES from "@/constants/routes";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpSchema } from "@/app/schemas/auth";
+import { z } from "zod";
+
+const SignUpPage = () => {
+  const form = useForm({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      name: "",
+      username: "",
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof signUpSchema>) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)} className="mt-10 space-y-6">
+      <FieldGroup className="gap-y-4">
+        <Controller
+          name="email"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel>Email Address</FieldLabel>
+              <Input
+                aria-invalid={fieldState.invalid}
+                placeholder="john@doe.com"
+                type="email"
+                autoComplete="email"
+                {...field}
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+
+        <Controller
+          name="password"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel>Password</FieldLabel>
+              <Input
+                aria-invalid={fieldState.invalid}
+                placeholder="******"
+                type="password"
+                autoComplete="current-password"
+                {...field}
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+
+        <Controller
+          name="name"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel>Name</FieldLabel>
+              <Input aria-invalid={fieldState.invalid} {...field} />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+
+        <Controller
+          name="username"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field>
+              <FieldLabel>Username</FieldLabel>
+              <Input aria-invalid={fieldState.invalid} {...field} />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+        <Button
+          className="primary-gradient paragraph-medium min-h-12 w-full
+            rounded-md px-4 py-3 font-inter text-light-900"
+        >
+          Sign in
+        </Button>
+
+        <p>
+          Already have an account?{" "}
+          <Link
+            className="paragraph-semibold primary-text-gradient"
+            href={ROUTES.SIGN_IN}
+          >
+            Sign In
+          </Link>
+        </p>
+      </FieldGroup>
+    </form>
+  );
 };
 
-export default SignUp;
+export default SignUpPage;
