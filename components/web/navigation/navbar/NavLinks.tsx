@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { sidebarLinks } from "@/constants";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import ROUTES from "@/constants/routes";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import { SheetClose } from "@/components/ui/sheet";
+import { sidebarLinks } from "@/constants";
+import ROUTES from "@/constants/routes";
+import { cn } from "@/lib/utils";
 
 type Props = {
   isMobileNav?: boolean;
@@ -15,29 +16,43 @@ type Props = {
 
 const NavLinks = ({ isMobileNav = false }: Props) => {
   const pathname = usePathname();
-  const userId = 1;
+  const userId = "1";
+
+  const getHref = (route: string | ((id: string) => string)) => {
+    if (typeof route === "function") {
+      return userId ? route(userId) : null;
+    }
+
+    return route;
+  };
+
+  const isRouteActive = (pathname: string, href: string) => {
+    if (href === ROUTES.HOME) {
+      return pathname === href;
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <>
       {sidebarLinks.map((item) => {
-        let href = item.route;
+        const href = getHref(item.route);
 
-        if (item.route === ROUTES.PROFILE) {
-          if (!userId) return null;
-          href = `${ROUTES.PROFILE}/${userId}`;
-        }
+        if (!href) return null;
 
-        const isActive =
-          (pathname.includes(href) && href.length > 1) || pathname === href;
+        const isActive = isRouteActive(pathname, href);
 
-        const LinkComponent = (
+        const content = (
           <Link
+            key={item.label}
             href={href}
             className={cn(
+              `flex items-center justify-start gap-4 rounded-lg bg-transparent
+              p-4 text-base`,
               isActive
-                ? "primary-gradient rounded-lg text-light-900"
-                : "text-dark300_light900",
-              "flex items-center justify-start gap-4 bg-transparent p-4"
+                ? "primary-gradient text-light-900"
+                : "text-dark300_light900"
             )}
           >
             <Image
@@ -47,10 +62,11 @@ const NavLinks = ({ isMobileNav = false }: Props) => {
               height={20}
               className={cn({ "invert-colors": !isActive })}
             />
+
             <p
               className={cn(
                 isActive ? "base-bold" : "base-medium",
-                !isMobileNav && "max-lg:hidden"
+                isMobileNav ? "text-base" : "max-lg:hidden"
               )}
             >
               {item.label}
@@ -60,10 +76,10 @@ const NavLinks = ({ isMobileNav = false }: Props) => {
 
         return isMobileNav ? (
           <SheetClose asChild key={href}>
-            {LinkComponent}
+            {content}
           </SheetClose>
         ) : (
-          <React.Fragment key={href}>{LinkComponent}</React.Fragment>
+          <React.Fragment key={href}>{content}</React.Fragment>
         );
       })}
     </>
