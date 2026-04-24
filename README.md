@@ -5,6 +5,8 @@
 - TypeScript
 - shadcn/ui
 - Tailwind CSS
+- React Hook Form
+- Zod
 
 ## 🤖 Features
 
