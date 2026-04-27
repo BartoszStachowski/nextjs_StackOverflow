@@ -4,8 +4,9 @@ import ROUTES from "@/constants/routes";
 import Link from "next/link";
 import LocalSearch from "@/components/web/search/LocalSearch";
 import HomeFilter from "@/components/web/filters/HomeFilter";
+import QuestionCard from "@/components/web/cards/QuestionCard";
 
-const questions = [
+const questions: Question[] = [
   {
     _id: "1",
     title: "How to learn React?",
@@ -14,11 +15,15 @@ const questions = [
       { _id: "1", name: "React " },
       { _id: "2", name: "JavaScript" },
     ],
-    author: { _id: "1", name: "John Kowalsky" },
+    author: {
+      _id: "1",
+      name: "John Kowalsky",
+      image: `https://avatar.vercel.sh/vercel.svg?text=JK`,
+    },
     upvotes: 10,
     answers: 5,
     views: 100,
-    createdAt: new Date(),
+    createdAt: new Date("2021-09-01"),
   },
   {
     _id: "2",
@@ -30,7 +35,11 @@ const questions = [
       { _id: "4", name: "Backend" },
       { _id: "2", name: "JavaScript" },
     ],
-    author: { _id: "2", name: "Jane Smith" },
+    author: {
+      _id: "2",
+      name: "Jane Smith",
+      image: `https://avatar.vercel.sh/vercel.svg?text=JS`,
+    },
     upvotes: 25,
     answers: 3,
     views: 150,
@@ -44,7 +53,11 @@ const questions = [
       { _id: "5", name: "CSS" },
       { _id: "6", name: "Frontend" },
     ],
-    author: { _id: "3", name: "Marek Nowak" },
+    author: {
+      _id: "3",
+      name: "Marek Nowak",
+      image: `https://avatar.vercel.sh/vercel.svg?text=MN`,
+    },
     upvotes: 40,
     answers: 8,
     views: 300,
@@ -98,7 +111,7 @@ const HomePage = async ({ searchParams }: SearchParams) => {
       <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
-          <h1 key={question._id}>{question.title}</h1>
+          <QuestionCard key={question._id} question={question} />
         ))}
       </div>
     </>
