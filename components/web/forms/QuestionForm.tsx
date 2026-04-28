@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import React from "react";
+import EditorContainer from "@/components/web/editor/EditorContainer";
 
 const QuestionForm = () => {
   const form = useForm({
@@ -71,6 +72,7 @@ const QuestionForm = () => {
                   <span className="text-primary-500">*</span>
                 </FieldLabel>
                 {/*<Input aria-invalid={fieldState.invalid} type="text" {...field} />*/}
+                <EditorContainer />
                 <FieldDescription className="text-light-500">
                   Introduce the problem and expand on what you&apos;ve put in
                   the title.
