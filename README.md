@@ -7,6 +7,7 @@
 - Tailwind CSS
 - React Hook Form
 - Zod
+- MDXEditor
 
 ## 🤖 Features
 
