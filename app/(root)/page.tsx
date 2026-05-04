@@ -88,13 +88,10 @@ const HomePage = async ({ searchParams }: SearchParams) => {
 
   return (
     <>
-      <section
-        className="w-full flex flex-col-reverse sm:flex-row justify-between
-          gap-4 sm:items-center"
-      >
+      <section className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="h1-bold text-dark100_light900">All Questions</h1>
         <Button
-          className="primary-gradient min-h-11.5 px-4 py-3 text-light-900!"
+          className="primary-gradient text-light-900! min-h-11.5 px-4 py-3"
           asChild
         >
           <Link href={ROUTES.ASK_QUESTION}>Ask a Question</Link>

@@ -67,10 +67,7 @@ const SignInPage = () => {
             </Field>
           )}
         />
-        <Button
-          className="primary-gradient paragraph-medium min-h-12 w-full
-            rounded-md px-4 py-3 font-inter text-light-900"
-        >
+        <Button className="primary-gradient paragraph-medium font-inter text-light-900 min-h-12 w-full rounded-md px-4 py-3">
           Sign in
         </Button>
 
