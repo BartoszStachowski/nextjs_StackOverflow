@@ -48,8 +48,7 @@ const NavLinks = ({ isMobileNav = false }: Props) => {
             key={item.label}
             href={href}
             className={cn(
-              `flex items-center justify-start gap-4 rounded-lg bg-transparent
-              p-4 text-base`,
+              `flex items-center justify-start gap-4 rounded-lg bg-transparent p-4 text-base`,
               isActive
                 ? "primary-gradient text-light-900"
                 : "text-dark300_light900"

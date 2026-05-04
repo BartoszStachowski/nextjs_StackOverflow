@@ -94,8 +94,7 @@ const QuestionForm = () => {
                 <Input
                   aria-invalid={fieldState.invalid}
                   type="text"
-                  className="background-light700_dark300! light-border-2!
-                    text-dark300_light700! min-h-14 border!"
+                  className="background-light700_dark300! light-border-2! text-dark300_light700! min-h-14 border!"
                   {...field}
                 />
                 {fieldState.invalid && (
@@ -142,8 +141,7 @@ const QuestionForm = () => {
                   <Input
                     aria-invalid={fieldState.invalid}
                     type="text"
-                    className="background-light700_dark300! light-border-2!
-                      text-dark300_light700! min-h-14 border!"
+                    className="background-light700_dark300! light-border-2! text-dark300_light700! min-h-14 border!"
                     onKeyDown={(e) => handleInputKeyDown(e, field)}
                   />
                   {field.value.length > 0 && (
@@ -174,7 +172,7 @@ const QuestionForm = () => {
             )}
           />
           <div className="flex justify-end">
-            <Button className="primary-gradient w-fit text-light-900!">
+            <Button className="primary-gradient text-light-900! w-fit">
               Ask A Question
             </Button>
           </div>
